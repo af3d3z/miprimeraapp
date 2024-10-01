@@ -1,50 +1,50 @@
 package com.example.miprimeraapp
 
-import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : AppCompatActivity()  {
     private var TAG = ":::vida"
-    companion object {
-        lateinit var label: EditText
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        Log.d(TAG, "onCreate: Recien creada")
+        val boton = findViewById<Button>(R.id.accessButton)
+        boton.setOnClickListener{
+            Log.d(TAG, "Pressed button")
+            val username = findViewById<EditText>(R.id.username).text.toString()
+            val password = findViewById<EditText>(R.id.password).text.toString()
+            Log.d(TAG, "Username: " + username)
+            Log.d(TAG, "Password: " + password)
 
-        label = findViewById<EditText>(R.id.username)
+            val intent = Intent(this, ControlActivity::class.java)
+            intent.putExtra("username", username)
+            intent.putExtra("password", password)
+            startActivity(intent)
 
-        findViewById<Button>(R.id.accessButton).setOnClickListener {
-            setContentView(R.layout.bienvenida)
-            Log.d(TAG, label.getText().toString())
         }
     }
-
+/*
     override fun onStart() {
         super.onStart()
         Log.d(TAG, "onStart: Acaba de arrancar la app.")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(TAG, "onRestart: La app se ha reiniciado.")
     }
 
     override fun onResume() {
         super.onResume()
         setContentView(R.layout.activity_main)
         Log.d(TAG, "onResume: La app vuelve a correr.")
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        Log.d(TAG, "onRestart: La app se ha reiniciado.")
     }
 
     override fun onPause(){
@@ -62,5 +62,5 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "onDestroy: Se ha destruido la app.")
         super.onDestroy()
     }
-
+*/
 }
