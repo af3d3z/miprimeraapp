@@ -29,16 +29,25 @@ class Calculadora : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        // botón de salida
+        val btn = findViewById<Button>(R.id.logout)
+        btn.setOnClickListener {
+            finish()
+        }
+
+        // recoge el usuario que nos provee ControlActivity y lo muestra con dos emojis a los lados
         val username = intent.getStringExtra("user")
         val welcome = findViewById<TextView>(R.id.welcomeText)
-        welcome.text = welcome.text.toString() + " " + username;
+        welcome.text = "👽" + username + "👽"
 
+        // llamamos las funciones para que estén listas cuando se pulsen los botones
         suma()
         resta()
         multiplicar()
         dividir()
     }
 
+    // carga los números de los EditText
     private fun cargarNumeros() {
         n1 = findViewById<EditText>(R.id.number1).text.toString().toFloatOrNull()?:0f
         n2 = findViewById<EditText>(R.id.number2).text.toString().toFloatOrNull()?:0f

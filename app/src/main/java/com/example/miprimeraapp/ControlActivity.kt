@@ -18,12 +18,18 @@ class ControlActivity : AppCompatActivity() {
             insets
         }
 
+        // recogemos las credenciales provistas por el usuario
         val user = intent.getStringExtra("username")
         val pass = intent.getStringExtra("password")
 
+        // dejamos preparadas los dos posibles intents que se usen
         val accesoCorrecto = Intent(this, Calculadora::class.java)
         val accesoIncorrecto = Intent(this, MainActivity::class.java)
 
+        /*
+            comprobamos que las credenciales son correctas, de serlo lanza la calculadora, de lo
+            contrario devuelve al usuario al login
+        */
         if(user.equals("alonso") && pass.equals("fdez")){
             accesoCorrecto.putExtra("user", user)
             startActivity(accesoCorrecto)

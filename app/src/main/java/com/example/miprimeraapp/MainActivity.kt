@@ -15,14 +15,18 @@ class MainActivity : AppCompatActivity()  {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // recogemos la pulsación del botón
         val boton = findViewById<Button>(R.id.accessButton)
         boton.setOnClickListener{
             Log.d(TAG, "Pressed button")
+            // recogemos las credenciales
             val username = findViewById<EditText>(R.id.username).text.toString()
             val password = findViewById<EditText>(R.id.password).text.toString()
             Log.d(TAG, "Username: " + username)
             Log.d(TAG, "Password: " + password)
 
+            // creamos el nuevo intent y le pasamos las credenciales del usuario para que compruebe si son válidas
             val intent = Intent(this, ControlActivity::class.java)
             intent.putExtra("username", username)
             intent.putExtra("password", password)
@@ -43,13 +47,15 @@ class MainActivity : AppCompatActivity()  {
 
     override fun onResume() {
         super.onResume()
-        setContentView(R.layout.activity_main)
+        var main = Intent(this, MainActivity::class.java)
+        startActivity(main)
         Log.d(TAG, "onResume: La app vuelve a correr.")
     }
 
     override fun onPause(){
         super.onPause()
         setContentView(R.layout.activity_pause)
+        var pause = Intent(this, Pause::class.java)
         Log.d(TAG, "onPause: Pausada.")
     }
 
